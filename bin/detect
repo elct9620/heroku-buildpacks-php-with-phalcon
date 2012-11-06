@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Didn't check php file because PhalconPHP may use index.html and .htaccess
 echo "PHP with PhalconPHP"
