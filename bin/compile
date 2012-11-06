@@ -9,8 +9,8 @@ CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 # URL
-PACKAGE_URL=http://vulcan-aotoki.herokuapp.com/output/08234ea0-18f0-4bbb-9a6d-9c37832abe0b
-COMPOSER_URL=http://getcomposer.org/composer.phar
+PACKAGE_URL="http://vulcan-aotoki.herokuapp.com/output/077f6674-c762-4bd7-9052-6f2f406f0c41"
+COMPOSER_URL="http://getcomposer.org/composer.phar"
 
 # Include .files when moving things around
 shopt -s dotglob
