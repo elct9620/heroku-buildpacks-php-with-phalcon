@@ -37,8 +37,8 @@ PHALCON_REPO=git://github.com/phalcon/cphalcon.git
 BASE_DIR=/app
 APACHE_ROOT=${BASE_DIR}/apache
 PHP_ROOT=${BASE_DIR}/php
-MCRYPT_ROOT=${BASE_DIR}/lib/mcrypt
-PCRE_ROOT=${BASE_DIR}/lib/pcre
+MCRYPT_ROOT=${BASE_DIR}/libs/mcrypt
+PCRE_ROOT=${BASE_DIR}/libs/pcre
 
 ## DIR
 APACHE_DIR=httpd-${APACHE_VERSION}
@@ -185,8 +185,8 @@ echo "[LOG] Packaging"
 cd /app
 mkdir package
 
-tar -zcf lib.tar.gz lib
-mv lib.tar.gz package/
+tar -zcf libs.tar.gz libs
+mv libs.tar.gz package/
 
 echo "$APACHE_VERSION" > $APACHE_ROOT/VERSION
 tar -zcf apache.tar.gz apache
