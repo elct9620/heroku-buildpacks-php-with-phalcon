@@ -8,9 +8,13 @@ Just using `heroku create APP_NAME -b https://github.com/elct9620/heroku-buildpa
 
 ### Specify your package source
 
+#### Require
+
+Enable heroku [user-env-compile](https://devcenter.heroku.com/articles/labs-user-env-compile) addon. (This still is labs feature)
+
 Using [profile.d](https://devcenter.heroku.com/articles/profiled) or `heroku config` command to setting `PACKAGE_URL` and you can use your special php pre-compile package.
 
-(This feature sitll not test, it may not work correctly)
+(This feature sitll under test, it may not work correctly)
 
 Build
 ---
