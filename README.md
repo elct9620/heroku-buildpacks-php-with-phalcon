@@ -1,5 +1,7 @@
-Heroku Buildpack - PHP with PahlconPHP
+Heroku Buildpack - PHP with PhalconPHP
 ===
+
+For phalcon user on heroku, easy deploy their phalcon app.
 
 Usage
 ---
@@ -11,6 +13,8 @@ Just using `heroku create APP_NAME -b https://github.com/elct9620/heroku-buildpa
 #### Require
 
 Enable heroku [user-env-compile](https://devcenter.heroku.com/articles/labs-user-env-compile) addon. (This still is labs feature)
+
+#### Usage
 
 Using [profile.d](https://devcenter.heroku.com/articles/profiled) or `heroku config` command to setting `PACKAGE_URL` and you can use your special php pre-compile package.
 
