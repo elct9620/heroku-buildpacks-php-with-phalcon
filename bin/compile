@@ -31,6 +31,8 @@ fi
 
 # Install
 echo "-----> Building Enviroment"
+
+echo "-----> Downloading pre-compile package: $PACKAGE_URL"
 curl --silent --max-time 60 --location "$PACKAGE_URL" | tar zx
 
 tar -zxf libs.tar.gz
