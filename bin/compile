@@ -9,7 +9,7 @@ CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 # URL
-PACKAGE_URL="http://vulcan-aotoki.herokuapp.com/output/077f6674-c762-4bd7-9052-6f2f406f0c41"
+PACKAGE_URL=${PACKAGE_URL:="http://vulcan-aotoki.herokuapp.com/output/ee6a776e-1e3d-47b4-9ea8-dd65b298289f"}
 COMPOSER_URL="http://getcomposer.org/composer.phar"
 
 # Include .files when moving things around

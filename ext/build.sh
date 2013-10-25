@@ -13,23 +13,24 @@
 # Settings
 
 ## Version
-APACHE_VERSION=2.4.3
-PHP_VERSION=5.4.8
+APACHE_VERSION=2.4.6
+PHP_VERSION=5.5.5
 LIBMCRYPT_VERSION=2.5.8
-APR_VERSION=1.4.6
-APR_UTIL_VERSION=1.5.1
-LIBPCRE_VERSION=8.31
-APC_VERSION=3.1.13
+APR_VERSION=1.4.8
+APR_UTIL_VERSION=1.5.2
+LIBPCRE_VERSION=8.33
+# Disable APC due PHP 5.5 using opcode
+# APC_VERSION=3.1.13
 
 ## Download URL
 APACHE_URL=http://www.us.apache.org/dist/httpd/httpd-${APACHE_VERSION}.tar.gz
 PHP_URL=http://us.php.net/distributions/php-${PHP_VERSION}.tar.gz
 MCRYPT_URL=http://downloads.sourceforge.net/project/mcrypt/MCrypt/2.6.8/mcrypt-2.6.8.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmcrypt%2F&ts=1352120606&use_mirror=nchc
-MCRYPT_URL=http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.bz2
+MCRYPT_URL=http://downloads.sourceforge.net/project/mcrypt/Libmcrypt/${LIBMCRYPT_VERSION}/libmcrypt-${LIBMCRYPT_VERSION}.tar.gz
 APR_URL=http://www.us.apache.org/dist/apr/apr-${APR_VERSION}.tar.gz
 APR_UTIL_URL=http://www.us.apache.org/dist/apr/apr-util-${APR_UTIL_VERSION}.tar.gz
 PCRE_URL=ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${LIBPCRE_VERSION}.tar.gz
-APC_URL=http://pecl.php.net/get/APC-${APC_VERSION}.tgz
+# APC_URL=http://pecl.php.net/get/APC-${APC_VERSION}.tgz
 
 PHALCON_REPO=git://github.com/phalcon/cphalcon.git
 
@@ -47,7 +48,7 @@ MCRYPT_DIR=libmcrypt-${LIBMCRYPT_VERSION}
 APR_DIR=apr-${APR_VERSION}
 APR_UTIL_DIR=apr-util-${APR_UTIL_VERSION}
 PCRE_DIR=pcre-${LIBPCRE_VERSION}
-APC_DIR=APC-${APC_VERSION}
+# APC_DIR=APC-${APC_VERSION}
 PHALCON_DIR=cphalcon
 
 ## FLAGS
@@ -93,15 +94,15 @@ if [ ! -d "$PHP_DIR" ]; then
   echo "[ERROR] Failed to find php directory $PHP_DIR"
 fi
 
-echo "[LOG] Downloading APC-{$APC_VERSION}"
-curl $CURL_FLAGS "$APC_URL" | tar zx
-if [ ! -d "$APC_DIR" ]; then
-  echo "[ERROR] Failed to find apc directory $APC_DIR"
-fi
+# echo "[LOG] Downloading APC-{$APC_VERSION}"
+# curl $CURL_FLAGS "$APC_URL" | tar zx
+# if [ ! -d "$APC_DIR" ]; then
+#   echo "[ERROR] Failed to find apc directory $APC_DIR"
+# fi
 
 ### Libmcrypt
 echo "[LOG] Downloading libmcrypt-${LIBMCRYPT_VERSION}"
-curl $CURL_FLAGS "$MCRYPT_URL" | tar jx
+curl $CURL_FLAGS "$MCRYPT_URL" | tar zx
 if [ ! -d "$MCRYPT_DIR" ]; then
   echo "[ERROR] Failed to find libmcrypt directory $MCRYPT_DIR"
 fi
@@ -158,12 +159,12 @@ cd ..
 
 /app/php/bin/pecl channel-update pecl.php.net
 
-echo "[LOG] Install PHP Extension: APC"
-cd $APC_DIR
-/app/php/bin/phpize
-./configure --enable-apc --enable-apc-filehits --with-php-config=$PHP_ROOT/bin/php-config
-make && make install
-cd ..
+# echo "[LOG] Install PHP Extension: APC"
+# cd $APC_DIR
+# /app/php/bin/phpize
+# ./configure --enable-apc --enable-apc-filehits --with-php-config=$PHP_ROOT/bin/php-config
+# make && make install
+# cd ..
 
 echo "[LOG] Install PHP Extension: LUA"
 /app/php/bin/pecl install lua
@@ -174,10 +175,12 @@ echo "[LOG] Install PHP Extension: Mongo"
 ## Phalcon
 echo "[LOG] Install PHP Extension: PhalconPHP"
 cd $PHALCON_DIR/build
-/app/php/bin/phpize
-./configure --enable-phalcon --with-php-config=$PHP_ROOT/bin/php-config
-make
-make install
+# /app/php/bin/phpize
+# ./configure --enable-phalcon --with-php-config=$PHP_ROOT/bin/php-config
+# make
+# make install
+export PATH=$PATH:/app/php/bin
+bash ./install
 cd ../..
 
 # Packaging
