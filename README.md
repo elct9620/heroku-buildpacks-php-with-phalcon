@@ -1,10 +1,10 @@
 Heroku Buildpack - PHP with PahlconPHP
 ===
 
-Install
+Usage
 ---
 
-Just using `heroku create APP_NAME -b git@github.com:elct9620/heroku-buildpacks-php-with-phalcon.git` to start your phalcon heroku app.
+Just using `heroku create APP_NAME -b https://github.com/elct9620/heroku-buildpacks-php-with-phalcon` to start your phalcon heroku app.
 
 ### Specify your package source
 
