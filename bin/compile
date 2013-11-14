@@ -55,8 +55,8 @@ echo "-----> Setting up Enviroment"
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
 
-ls -al /app/php/bin
-ls -al
+ls -al $BUILD_DIR
+ls -al $BUILD_DIR/php/bin
 
 # Composer Dependencies
 if [ -f www/composer.json ] && [ ! -d www/vendor ]; then
