@@ -55,12 +55,9 @@ echo "-----> Setting up Enviroment"
 mkdir -p bin
 ln -s /app/php/bin/php bin/php
 
-ls -al $BUILD_DIR
-ls -al $BUILD_DIR/php/bin
-
 # Composer Dependencies
 if [ -f www/composer.json ] && [ ! -d www/vendor ]; then
-  PHP_EXTENSION_DIR=$(/app/php/bin/php-config --extension-dir)
+  PHP_EXTENSION_DIR=$($BUILD_DIR/php/bin/php-config --extension-dir)
   GIT_DIR_ORIG=$GIT_DIR
   unset GIT_DIR
   echo "-----> Installing Composer Dependencies"
