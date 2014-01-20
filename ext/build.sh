@@ -7,17 +7,18 @@
 # HomePage: http://frost.tw
 #
 # History:
+#   2014-01-20 Upgrade Version and add more extension support
 #   2012-11-05 First Create Project
 ###
 
 # Settings
 
 ## Version
-APACHE_VERSION=2.4.6
+APACHE_VERSION=2.4.7
 PHP_VERSION=5.5.7
 LIBMCRYPT_VERSION=2.5.8
-APR_VERSION=1.4.8
-APR_UTIL_VERSION=1.5.2
+APR_VERSION=1.5.0
+APR_UTIL_VERSION=1.5.3
 LIBPCRE_VERSION=8.33
 # Disable APC due PHP 5.5 using opcode
 # APC_VERSION=3.1.13
@@ -67,24 +68,28 @@ echo "[LOG] Downloading apache-$APACHE_VERSION"
 curl $CURL_FLAGS "$APACHE_URL" | tar zx
 if [ ! -d "$APACHE_DIR" ]; then
   echo "[ERROR] Failed to find apache directory $APACHE_DIR "
+  exit
 fi
 
 echo "[LOG] Downloading apr-$APR_VERSION"
 curl $CURL_FLAGS "$APR_URL" | tar zx
 if [ ! -d "$APR_DIR" ]; then
   echo "[ERROR] Failed to find apr directory $APR_DIR"
+  exit
 fi
 
 echo "[LOG] Downloading aph-util-$APR_UTIL_VERSION"
 curl $CURL_FLAGS "$APR_UTIL_URL" | tar zx
 if [ ! -d "$APR_UTIL_DIR" ]; then
   echo "[ERROR] Failed to find apr-util directory $APR_UTIL_DIR"
+  exit
 fi
 
 echo "[LOG] Downloading pcre-${LIBPCRE_VERSION}"
 curl $CURL_FLAGS "$PCRE_URL" | tar zx
 if [ ! -d "$PCRE_DIR" ]; then
   echo "[ERROR] Failed to find libpcre directory $PCRE_DIR"
+  exit
 fi
 
 ### PHP
@@ -92,6 +97,7 @@ echo "[LOG] Downloading php-${PHP_VERSION}"
 curl $CURL_FLAGS "$PHP_URL" | tar zx
 if [ ! -d "$PHP_DIR" ]; then
   echo "[ERROR] Failed to find php directory $PHP_DIR"
+  exit
 fi
 
 # echo "[LOG] Downloading APC-{$APC_VERSION}"
@@ -105,6 +111,7 @@ echo "[LOG] Downloading libmcrypt-${LIBMCRYPT_VERSION}"
 curl $CURL_FLAGS "$MCRYPT_URL" | tar zx
 if [ ! -d "$MCRYPT_DIR" ]; then
   echo "[ERROR] Failed to find libmcrypt directory $MCRYPT_DIR"
+  exit
 fi
 
 ### Phalcon
@@ -112,6 +119,7 @@ echo "[LOG] Downloading PhalconPHP"
 git clone $PHALCON_REPO -q
 if [ ! -d "$PHALCON_DIR" ]; then
   echo "[ERROR] Failed to find phalconphp directory $PHALCON_DIR"
+  exi
 fi
 
 ## Build
