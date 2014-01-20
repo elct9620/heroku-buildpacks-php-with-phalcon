@@ -25,13 +25,19 @@ Build
 
 ### Require
 
-* Heroku Vulcan
 * A litle Shell Script Knowledge
 
 ### Howto
 
 First, you may want modify `ext/build.sh` and setting up your PHP version and add some PHP extension.
 
-When your already specify your version and extension, just run `ext/vulcan-build.sh` and it will auto run build and down packaged file to `/tmp`
+* `heroku run bash` to connect your heroku binary build app
+* `curl https://raw.github.com/elct9620/heroku-buildpacks-php-with-phalcon/develop/ext/build.sh` download the build script (or from your github )
+* `chmod +x build.sh`
+* `./build.sh` run build script and wait
+* `cd build/`
+* `tar -zcf package.tar.gz apache.tar.gz php.tar.gz libs.tar.gz` package all necessary files
+* using "SCP" or other method to copy this package to remote server where your heroku app can access this package
+  ( I using `curl -k -T package.tar.gz http://myNAS-Webdav-Endpoint/` to download this file)
 
 
