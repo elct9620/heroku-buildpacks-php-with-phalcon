@@ -14,7 +14,7 @@
 
 ## Version
 APACHE_VERSION=2.4.6
-PHP_VERSION=5.5.5
+PHP_VERSION=5.5.7
 LIBMCRYPT_VERSION=2.5.8
 APR_VERSION=1.4.8
 APR_UTIL_VERSION=1.5.2
@@ -150,6 +150,7 @@ cd $PHP_DIR
 ./configure --prefix=$PHP_ROOT --with-config-file-path=$PHP_ROOT --with-apxs2=$APACHE_ROOT/bin/apxs \
   --with-mysql --with-pdo-mysql --with-pgsql --with-pdo-pgsql \
   --with-iconv --with-gd --with-curl --enable-soap=shared --with-openssl \
+  --enable-mbstring --with-curl \
   --with-mcrypt=$MCRYPT_ROOT --with-jpeg-dir=/usr
 make
 make install
@@ -171,6 +172,12 @@ echo "[LOG] Install PHP Extension: LUA"
 
 echo "[LOG] Install PHP Extension: Mongo"
 /app/php/bin/pecl install mongo
+
+echo "[LOG] Install PHP Extension: Memcached"
+/app/php/bin/pecl install memcached
+
+echo "[LOG] Install PHP Extension: Redis"
+/app/php/bin/pecl install redis
 
 ## Phalcon
 echo "[LOG] Install PHP Extension: PhalconPHP"
