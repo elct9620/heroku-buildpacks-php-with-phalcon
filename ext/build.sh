@@ -119,7 +119,7 @@ echo "[LOG] Downloading PhalconPHP"
 git clone $PHALCON_REPO -q
 if [ ! -d "$PHALCON_DIR" ]; then
   echo "[ERROR] Failed to find phalconphp directory $PHALCON_DIR"
-  exi
+  exit
 fi
 
 ## Build
