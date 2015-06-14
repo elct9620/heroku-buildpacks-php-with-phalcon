@@ -40,4 +40,10 @@ First, you may want modify `ext/build.sh` and setting up your PHP version and ad
 * using "SCP" or other method to copy this package to remote server where your heroku app can access this package
   ( I using `curl -k -T package.tar.gz http://myNAS-Webdav-Endpoint/` to download this file)
 
+### Dockerfile
 
+Since Heroku support [docker](https://blog.heroku.com/archives/2015/5/5/introducing_heroku_docker_release_build_deploy_heroku_apps_with_docker), I plan migrate this buildpacks to docker version.
+
+But Heroku didn't build slug, and cause the `docker:release` command spend a lot time to upload slug (about 49MB) so I will mantaince this project, and provide Dockerfile for contribute this project.
+
+Now, the latest Dockerfile was added, and the buildpacks will update as soon as possible to use the latest build.
