@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f slug.tar.gz ]; then
+  rm slug.tar.gz
+fi
+
 # Build Image
 docker build -t php-with-phalcon .  # Run docker
 CONTAINER_ID=$(docker run -d php-with-phalcon /app/package.sh)

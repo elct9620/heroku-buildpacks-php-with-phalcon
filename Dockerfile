@@ -141,7 +141,8 @@ RUN sed -ire 's/^Listen.*$/Listen \${PORT}/g' $APACHE_ROOT/conf/httpd.conf && \
     sed -ire 's/AllowOverride\ None/AllowOverride\ All/g' $APACHE_ROOT/conf/httpd.conf
 RUN echo "<IfModule dir_module>\nDirectoryIndex index.html index.php\n</IfModule>" >> $APACHE_ROOT/conf/httpd.conf && \
     echo "<FilesMatch \.php$>\nSetHandler application/x-httpd-php\n</FilesMatch>" >> $APACHE_ROOT/conf/httpd.conf
-RUN echo "extension=phalcon.so" >> $PHP_ROOT/php.ini && \
+RUN echo "zend_extension=opcache.so" >> $PHP_ROOT/php.ini && \
+    echo "extension=phalcon.so" >> $PHP_ROOT/php.ini && \
     echo "extension=mongo.so" >> $PHP_ROOT/php.ini && \
     echo "extension=redis.so" >> $PHP_ROOT/php.ini
 
