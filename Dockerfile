@@ -144,6 +144,10 @@ RUN echo "extension=phalcon.so" >> $PHP_ROOT/php.ini && \
     echo "extension=mongo.so" >> $PHP_ROOT/php.ini && \
     echo "extension=redis.so" >> $PHP_ROOT/php.ini
 
+USER root
+COPY ./ext/package.sh /app/package.sh
+RUN chmod +x /app/package.sh
+
 # Copy SourceCode
 ONBUILD COPY . /app/src
 ONBUILD USER root
