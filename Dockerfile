@@ -99,6 +99,7 @@ RUN cd $BUILD_HOME && \
     --prefix=$PHP_ROOT \
     --with-config-file-path=$PHP_ROOT \
     --with-apxs2=$APACHE_ROOT/bin/apxs \
+    --enable-opcache \
     --with-mysql \
     --with-pdo-mysql \
     --with-pgsql \
