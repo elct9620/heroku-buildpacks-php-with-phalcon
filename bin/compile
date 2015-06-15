@@ -67,7 +67,7 @@ if [ -f src/composer.json ] && [ ! -d src/vendor ]; then
   echo "-----> Installing Composer Dependencies"
   curl --silent --max-time 60 --location "$COMPOSER_URL" > src/composer.phar
   cd src
-  LD_LIBRARY_PATH=$BUILD_DIR/php/lib/php/extensions/$BUILD_PHP_EXTENSION_DIR:$BUILD_DIR/libs/libmcrypt/lib:$BUILD_DIR/libs/pcre/lib $BUILD_DIR/php/bin/php -c $LP_DIR/conf/php.ini composer.phar install --prefer-source
+  LD_LIBRARY_PATH=$BUILD_DIR/php/lib/php/extensions/$BUILD_PHP_EXTENSION_DIR:$BUILD_DIR/libs/libmcrypt/lib:$BUILD_DIR/libs/pcre/lib $BUILD_DIR/php/bin/php -c $BUILD_DIR/php/php.ini composer.phar install --prefer-source
   cd $BUILD_DIR
   rm src/composer.phar
   export GIT_DIR=$GIT_DIR_ORIG
