@@ -3,13 +3,16 @@
 # Fail Fase
 set -e
 
+# Version
+PACKAGE_VERSION=0.3.0
+
 # Path
 BUILD_DIR=$1
 CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 # URL
-PACKAGE_URL=${PACKAGE_URL:="https://github.com/elct9620/heroku-buildpacks-php-with-phalcon/releases/download/0.2.0-alpha/0.2.0-alpha.tar.gz"}
+PACKAGE_URL=${PACKAGE_URL:="https://github.com/elct9620/heroku-buildpacks-php-with-phalcon/releases/download/$PACKAGE_VERSION/$PACKAGE_VERSION.tar.gz"}
 # If pre-compile already upload to github, it will replace vulcan cache url
 # PACKAGE_URL=${PACKAGE_URL:="http://vulcan-aotoki.herokuapp.com/output/ee6a776e-1e3d-47b4-9ea8-dd65b298289f"}
 COMPOSER_URL="http://getcomposer.org/composer.phar"
@@ -21,14 +24,14 @@ shopt -s dotglob
 
 cd $BUILD_DIR
 
-# Moving Things to www
-mkdir -p $CACHE_DIR/www
-mv * $CACHE_DIR/www
-mv $CACHE_DIR/www .
+# Moving things to src
+mkdir -p $CACHE_DIR/src
+mv * $CACHE_DIR/src
+mv $CACHE_DIR/src .
 
 # Keep Procfile
-if [ -f www/Procfile ]; then
-  mv www/Procfile .
+if [ -f src/Procfile ]; then
+  mv src/Procfile .
 fi
 
 # Install
@@ -47,8 +50,8 @@ rm -f php.tar.gz
 
 # Update CONF
 echo "-----> Updating Config"
-cp $LP_DIR/conf/httpd.conf apache/conf
-cp $LP_DIR/conf/php.ini php
+#cp $LP_DIR/conf/httpd.conf apache/conf
+#cp $LP_DIR/conf/php.ini php
 
 # Setting up Enviroment
 echo "-----> Setting up Enviroment"
@@ -56,17 +59,17 @@ mkdir -p bin
 ln -s /app/php/bin/php bin/php
 
 # Composer Dependencies
-if [ -f www/composer.json ] && [ ! -d www/vendor ]; then
+if [ -f src/composer.json ] && [ ! -d src/vendor ]; then
   PHP_EXTENSION_DIR=$($BUILD_DIR/php/bin/php-config --extension-dir)
   BUILD_PHP_EXTENSION_DIR=$(basename $PHP_EXTENSION_DIR)
   GIT_DIR_ORIG=$GIT_DIR
   unset GIT_DIR
   echo "-----> Installing Composer Dependencies"
-  curl --silent --max-time 60 --location "$COMPOSER_URL" > www/composer.phar
-  cd www
+  curl --silent --max-time 60 --location "$COMPOSER_URL" > src/composer.phar
+  cd src
   LD_LIBRARY_PATH=$BUILD_DIR/php/lib/php/extensions/$BUILD_PHP_EXTENSION_DIR:$BUILD_DIR/libs/mcrypt/lib:$BUILD_DIR/libs/pcre/lib $BUILD_DIR/php/bin/php -c $LP_DIR/conf/php.ini composer.phar install --prefer-source
   cd $BUILD_DIR
-  rm www/composer.phar
+  rm src/composer.phar
   export GIT_DIR=$GIT_DIR_ORIG
 fi
 
@@ -82,7 +85,7 @@ cat >>boot.sh <<EOF
   tail -F /app/apache/logs/error_log &
   tail -F /app/apache/logs/access_log &
   export LD_LIBRARY_PATH=/app/php/ext
-  export PHP_INI_SCAN_DIR=/app/www
+  export PHP_INI_SCAN_DIR=/app/src
   echo "Launching apache"
   exec /app/apache/bin/httpd -DNO_DETACH
 EOF
