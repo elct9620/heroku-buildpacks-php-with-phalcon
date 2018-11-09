@@ -1,7 +1,12 @@
-Heroku Buildpack - PHP with PhalconPHP
+[Deprecated] Heroku Buildpack - PHP with PhalconPHP
 ===
 
 For phalcon user on heroku, easy deploy their phalcon app.
+
+WARNING
+---
+
+This project is not work on Heroku now, please try Phalcon's Docker image and use it with Heroku Docker solution.
 
 Usage
 ---
